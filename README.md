@@ -2,7 +2,7 @@
 
 ## Setup
 
-1. (Installin rust)[https://doc.rust-lang.org/stable/book/ch01-01-installation.html]
+1. [Installin rust](https://doc.rust-lang.org/stable/book/ch01-01-installation.html)
 2. Verify installation
 ``
 $ rustc --version
