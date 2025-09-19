@@ -1,0 +1,15 @@
+[package]
+name = "learning_rust"
+version = "0.1.0"
+edition = "2024"
+
+[workspace]
+members = [
+    "exercises/01_hello_world",
+    "exercises/02_variables",
+    "exercises/03_functions",
+    "exercises/04_control_flow",
+    "exercises/05_primitive_types_slices",
+    "exercises/guessing_game"
+]
+[dependencies]
