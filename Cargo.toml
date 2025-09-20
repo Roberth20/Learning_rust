@@ -10,6 +10,7 @@ members = [
     "exercises/03_functions",
     "exercises/04_control_flow",
     "exercises/05_primitive_types_slices",
-    "exercises/guessing_game"
-]
+    "exercises/06_ownership",
+    "exercises/guessing_game", 
+    "exercises/quizzes"]
 [dependencies]
