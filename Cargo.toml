@@ -11,6 +11,8 @@ members = [
     "exercises/04_control_flow",
     "exercises/05_primitive_types_slices",
     "exercises/06_ownership",
+    "exercises/07_structures",
     "exercises/guessing_game", 
-    "exercises/quizzes"]
+    "exercises/quizzes", 
+]
 [dependencies]
