@@ -12,8 +12,10 @@ members = [
     "exercises/05_primitive_types_slices",
     "exercises/06_ownership",
     "exercises/07_structures", 
-    "exercises/08_enums", "exercises/codewars",
+    "exercises/08_enums", 
+    "exercises/09_cargo_organization", 
+    "exercises/codewars",
     "exercises/guessing_game", 
-    "exercises/quizzes", 
+    "exercises/quizzes", "exercises/09_restaurant_xample", 
 ]
 [dependencies]
