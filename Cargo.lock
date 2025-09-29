@@ -17,6 +17,10 @@ name = "codewars"
 version = "0.1.0"
 
 [[package]]
+name = "common_collections"
+version = "0.1.0"
+
+[[package]]
 name = "control_flow"
 version = "0.1.8"
 

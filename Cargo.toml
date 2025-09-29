@@ -16,6 +16,6 @@ members = [
     "exercises/09_cargo_organization", 
     "exercises/codewars",
     "exercises/guessing_game", 
-    "exercises/quizzes", "exercises/09_restaurant_xample", 
+    "exercises/quizzes", "exercises/09_restaurant_xample", "exercises/10_common_collections", 
 ]
 [dependencies]
