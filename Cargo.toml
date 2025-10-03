@@ -19,6 +19,8 @@ members = [
     "exercises/quizzes", 
     "exercises/09_restaurant_xample", 
     "exercises/10_common_collections", 
-    "exercises/11_error_handling", "exercises/12_generics_traits_lifetimes", 
+    "exercises/11_error_handling", 
+    "exercises/12_generics_traits_lifetimes", 
+    "exercises/13_into_tests", 
 ]
 [dependencies]
