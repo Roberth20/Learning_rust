@@ -7,3 +7,6 @@ pub mod caesar_cipher;
 pub mod break_camelcasing;
 pub mod string_ends_with;
 pub mod greed_is_good;
+pub mod reverse_strings;
+pub mod bool_to_string;
+pub mod xs_os;
