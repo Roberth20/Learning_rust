@@ -6,19 +6,23 @@
 */
 
 pub fn search<'a>(query: &str, contents: &'a str) -> Vec<&'a str> {
-    let mut result = Vec::new();
+    /*let mut result = Vec::new();
     for line in contents.lines() {
         if line.contains(query) {
             result.push(line);
         }
     }
-    result
+    result*/
+    // This improved version with iterators is clearer and allow a future concurrence
+    // improvements
+    contents.lines().filter(|line| line.contains(query)).collect()
 }
 
 pub fn search_case_insensitive<'a>(
     query: &str,
     contents: &'a str,
 ) -> Vec<&'a str> {
+    /*
     let query = query.to_lowercase();
     let mut results = Vec::new();
 
@@ -28,7 +32,14 @@ pub fn search_case_insensitive<'a>(
         }
     }
 
-    results
+    results*/
+    // The same with case_insensitive
+    contents
+        .lines()
+        .filter(|line| 
+            line.to_lowercase().contains(&query.to_lowercase())
+        )
+        .collect()
 }
 
 

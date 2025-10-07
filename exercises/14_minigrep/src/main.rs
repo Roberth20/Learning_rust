@@ -13,6 +13,13 @@ fn main() {
         eprintln!("Problem parsing arguments: {err}");
         process::exit(1);
     });
+    // With iterator knowledge
+    let config = Config::build2(env::args()).unwrap_or_else(
+        |err| {
+            eprintln!("Problem parsing arguments {err}");
+            process::exit(1);
+       }
+    );
 
     println!("Searching for query '{}'", config.query);
     println!("In file '{}'", config.file_path);
@@ -68,4 +75,35 @@ impl Config {
 
         Ok(Config{query, file_path, ignore_case})
     }
+
+    fn build2(
+        // This way, args can be any type which implement Iterator trait and return
+        // String items
+        mut args: impl Iterator<Item = String>,
+    ) -> Result<Config, &'static str> {
+        // Skip first arg, filename
+        args.next();
+
+        // Handle values
+        let query = match args.next() {
+            Some(arg) => arg,
+            None => return Err("Didn't get a query string"),
+        };
+
+        let file_path = match args.next() {
+            Some(arg) => arg,
+            None => return Err("Didn't get a file path"),
+        };
+
+        let ignore_case = match args.next() {
+            Some(arg) => true,
+            None => env::var("IGNORE_CASE").is_ok(),
+        };
+
+        Ok(Config { 
+            query, 
+            file_path,
+            ignore_case}
+        )
+    }   
 }

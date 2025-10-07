@@ -33,6 +33,10 @@ name = "error_handling"
 version = "0.1.0"
 
 [[package]]
+name = "functional_features"
+version = "0.1.0"
+
+[[package]]
 name = "functions"
 version = "0.1.0"
 
