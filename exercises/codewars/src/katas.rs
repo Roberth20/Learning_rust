@@ -10,3 +10,5 @@ pub mod greed_is_good;
 pub mod reverse_strings;
 pub mod bool_to_string;
 pub mod xs_os;
+pub mod smallest_integer;
+pub mod pagination_helper;

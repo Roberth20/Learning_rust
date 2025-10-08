@@ -21,6 +21,9 @@ members = [
     "exercises/10_common_collections", 
     "exercises/11_error_handling", 
     "exercises/12_generics_traits_lifetimes", 
-    "exercises/13_into_tests", "exercises/14_minigrep", "exercises/15_functional_features", 
+    "exercises/13_into_tests", 
+    "exercises/14_minigrep", 
+    "exercises/15_functional_features", 
+    "exercises/16_more_cargo", 
 ]
 [dependencies]

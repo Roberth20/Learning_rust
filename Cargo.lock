@@ -86,6 +86,10 @@ name = "minigrep"
 version = "0.1.0"
 
 [[package]]
+name = "more_cargo"
+version = "0.1.0"
+
+[[package]]
 name = "ownership"
 version = "0.1.0"
 
