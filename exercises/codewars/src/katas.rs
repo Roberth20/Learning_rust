@@ -12,3 +12,7 @@ pub mod bool_to_string;
 pub mod xs_os;
 pub mod smallest_integer;
 pub mod pagination_helper;
+pub mod bool_to_word;
+pub mod returning_string_greet;
+pub mod who_likes_it;
+pub mod int32_to_ipv4;
