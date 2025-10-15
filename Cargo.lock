@@ -168,6 +168,10 @@ name = "restaurant_xample"
 version = "0.1.0"
 
 [[package]]
+name = "smart_pointers"
+version = "0.1.0"
+
+[[package]]
 name = "structures"
 version = "0.1.0"
 
