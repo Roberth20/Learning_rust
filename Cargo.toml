@@ -24,6 +24,6 @@ members = [
     "exercises/13_into_tests", 
     "exercises/14_minigrep", 
     "exercises/15_functional_features", 
-    "exercises/16_more_cargo", "exercises/17_smart_pointers", 
+    "exercises/16_more_cargo", "exercises/17_smart_pointers", "exercises/18_concurrency", 
 ]
 [dependencies]
