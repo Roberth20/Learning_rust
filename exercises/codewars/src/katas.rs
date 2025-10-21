@@ -18,3 +18,5 @@ pub mod who_likes_it;
 pub mod int32_to_ipv4;
 pub mod beeramid;
 pub mod perimeter_armonic_rectangle;
+pub mod hashtag_generator;
+pub mod hero_quotes;
