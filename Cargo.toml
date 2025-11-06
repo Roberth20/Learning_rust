@@ -28,5 +28,6 @@ members = [
     "exercises/17_smart_pointers",
     "exercises/18_concurrency",
     "exercises/19_async_programming", 
+    "exercises/20_object_oriented", 
 ]
 [dependencies]
