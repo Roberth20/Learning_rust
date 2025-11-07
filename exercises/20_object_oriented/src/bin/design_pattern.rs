@@ -6,6 +6,12 @@ will make some changes with rust funcionalities. The functionalities are
 3. When the post is approved, it gets published.
 4. Only published blog posts return content to print, so unapproved posts can’t 
    accidentally be published.
+
+As exercises, we will expand the Post object with:
+
+1. Add a reject method that changes the post’s state from PendingReview back to Draft.
+2. Require two calls to approve before the state can be changed to Published.
+3. Allow users to add text content only when a post is in the Draft state.
 */
 // Let's start with the Post object
 struct Post {
@@ -25,7 +31,8 @@ impl Post {
     }
     // Now, we need a method to add text to the content of the post
     fn add_text(&mut self, text: &str) {
-        self.content.push_str(text);
+        let content = self.state.as_ref().unwrap().add_content(text, &self.content);
+        self.content = content;
     }
     // And a method that return an empty content for the Post until is approved.
     fn content(&self) -> &str {
@@ -49,6 +56,11 @@ impl Post {
             self.state = Some(s.approve())
         }
     }
+    fn reject(&mut self) {
+        if let Some(s) = self.state.take() {
+            self.state = Some(s.reject())
+        }
+    }
 }
 
 // Trait for the state of the post, allow to share the same behavior between different
@@ -67,6 +79,11 @@ trait State {
     fn content<'a>(&self, post: &'a Post) -> &'a str {
         ""
     }
+    fn reject(self: Box<Self>) -> Box<dyn State>;
+
+    fn add_content(&self, text: &str, content: &str) -> String {
+        content.to_string()
+    }
 }
 
 // Struct for the draft state of the post
@@ -75,16 +92,24 @@ struct Draft {}
 impl State for Draft {
     // For Draft, when requesting a review, the state must be changed
     fn request_review(self: Box<Self>) -> Box<dyn State> {
-        Box::new(PendingReview {})
+        Box::new(PendingReview {reviews: 1})
     }
     // As a draft can not be approved without request review, the state stay the same
     fn approve(self: Box<Self>) -> Box<dyn State> {
         self
     }
+    fn reject(self: Box<Self>) -> Box<dyn State> {
+        self
+    }
+    fn add_content(&self, text: &str, content: &str) -> String {
+        let mut new_content = content.to_string();
+        new_content.push_str(text);
+        new_content
+    }
 }
 
 // Struct for the pending review state
-struct PendingReview {}
+struct PendingReview {reviews: u8}
 
 impl State for PendingReview {
     // When requesting a review with the state PendingReview, we return the same because
@@ -93,7 +118,15 @@ impl State for PendingReview {
         self
     }
     fn approve(self: Box<Self>) -> Box<dyn State> {
-        Box::new(Published {})
+        if self.reviews < 2 {
+            Box::new(PendingReview {reviews: 2})
+        } else {
+            Box::new(Published {})
+        }
+    
+    }
+    fn reject(self: Box<Self>) -> Box<dyn State> {
+        Box::new(Draft {})
     }
 }
 
@@ -110,6 +143,9 @@ impl State for Published {
     fn content<'a>(&self, post: &'a Post) -> &'a str {
         &post.content
     }
+    fn reject(self: Box<Self>) -> Box<dyn State> {
+        self
+    }
 }
 
 fn main() {
@@ -122,8 +158,20 @@ fn main() {
     post.request_review();
     assert_eq!("", post.content());
 
+    post.reject();
+    assert_eq!("", post.content());
+
+    post.add_text(" with pancakes!!!");
+    assert_eq!("", post.content());
+
+    post.request_review();
+    assert_eq!("", post.content());
+
     post.approve();
-    assert_eq!("I like to drink coffee at the morning", post.content());
+    assert_eq!("", post.content());
+
+    post.approve();
+    assert_eq!("I like to drink coffee at the morning with pancakes!!!", post.content());
 }
 
 /*All this code can be done with Enums too, but it will be repetitive with match expressions
