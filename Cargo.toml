@@ -29,5 +29,6 @@ members = [
     "exercises/18_concurrency",
     "exercises/19_async_programming", 
     "exercises/20_object_oriented", 
+    "exercises/21_patterns", 
 ]
 [dependencies]
