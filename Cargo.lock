@@ -374,6 +374,10 @@ dependencies = [
 ]
 
 [[package]]
+name = "hello_web_server"
+version = "0.1.0"
+
+[[package]]
 name = "hello_world"
 version = "0.1.0"
 

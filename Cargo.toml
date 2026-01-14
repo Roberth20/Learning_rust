@@ -30,6 +30,8 @@ members = [
     "exercises/19_async_programming", 
     "exercises/20_object_oriented", 
     "exercises/21_patterns", 
-    "exercises/22_advanced_features", "exercises/hello_macro_derive", 
+    "exercises/22_advanced_features", 
+    "exercises/hello_macro_derive", 
+    "exercises/23_hello_web_server", 
 ]
 [dependencies]
