@@ -1,18 +1,33 @@
+use hello_web_server::ThreadPool;
 use std::fs;
 use std::io::{BufReader, prelude::*};
 use std::net::{TcpListener, TcpStream};
+use std::thread;
+use std::time::Duration;
 
 fn main() {
     // Let's start our server by creating a listener for a local addres.
     // `bind` is like `new` in networking words.
     let listener = TcpListener::bind("127.0.0.1:7878").unwrap();
+    // Create a pool of threads to limit the number of threads to use.
+    let pool = ThreadPool::new(4);
     // The incomming method return an iterator with the *stremas*, the streams
     // are open connections between client and the server
-    for stream in listener.incoming() {
+    for stream in listener.incoming().take(2) {
         let stream = stream.unwrap();
 
-        handle_connection_v2(stream);
+        // Create thread for a request
+        //thread::spawn(|| {
+        //    handle_connection_v2(stream);
+        //})
+
+        // Execute in a thread of the pool
+        pool.execute(|| {
+            handle_connection_v2(stream);
+        });
     }
+
+    println!("Shutting down.");
 }
 
 // Now create a connection handler to read the data sent from the browser.
@@ -65,16 +80,23 @@ fn handle_connection_v2(mut stream: TcpStream) {
     let buf_reader = BufReader::new(&stream);
     let request_line = buf_reader.lines().next().unwrap().unwrap();
 
-    let (status_line, filename) = if request_line == "GET / HTTP/1.1" {
-        (
+    let (status_line, filename) = match &request_line[..] {
+        "GET / HTTP/1.1" => (
             "HTTP/1.1 200 OK",
             "exercises/23_hello_web_server/hello.html",
-        )
-    } else {
-        (
+        ),
+        // Simulate slow request
+        "GET /sleep HTTP/1.1" => {
+            thread::sleep(Duration::from_secs(5));
+            (
+                "HTTP/1.1 200 OK",
+                "exercises/23_hello_web_server/hello.html",
+            )
+        }
+        _ => (
             "HTTP/1.1 404 NOT FOUND",
             "exercises/23_hello_web_server/404.html",
-        )
+        ),
     };
 
     let contents = fs::read_to_string(filename).unwrap();
